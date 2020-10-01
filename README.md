@@ -1,6 +1,6 @@
 # bibliotheksverwaltung
 
-## How Tro Contribute
+## How To Contribute
 
 - Fork erstellen
 - Fork klonen
