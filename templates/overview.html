@@ -2,40 +2,81 @@
 
 {% block main %}
     <div class="row">
-        {% for item in objects %}
-            {% if item.category.lower == "buch" %}
+        {% if books.count != 0 %}
+            {% for book in books %}
                 <div class="card col-md-4">
-                <div class="card-header">
-                    <b>{{ item.subject }}</b>
-                </div>
-                <img class="card-img-top" src="#" alt="Bild von {{ item.category }}">
-                <div class="card-body">
-                    <div class="card-title">
-                        <h4>{{ item.name }}</h4>
+                    <div class="card-header">
+                        <b>{{ book.subject }}</b>
                     </div>
-                    <p class="card-text">Autor: {{ item.author }}</p>
-                    <a href="#" class="btn btn-primary">Ausleihen</a>
-                    <a href="#" class="btn btn-info">Weitere Infos</a>
+                    <img class="card-img-top" src="#" alt="Bild von {{ book.category }}">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <h4>{{ book.name }}</h4>
+                        </div>
+                        <p class="card-text">Autor: {{ book.author }}</p>
+                        <a href="#" class="btn btn-primary">Ausleihen</a>
+                        <a href="#" class="btn btn-info">Weitere Infos</a>
+                    </div>
                 </div>
-            </div>
-            {% endif %}
+            {% endfor %}
+        {% endif %}
 
-            {% if item.category.lower == "container" %}
+    {% if materials.count != 0 %}
+            {% for material in materials %}
                 <div class="card col-md-4">
-                <div class="card-header">
-                    <b>{{ item.name }}</b>
-                </div>
-                <img class="card-img-top" src="#" alt="Bild von {{ item.category }}">
-                <div class="card-body">
-                    <div class="card-title">
-                        <h4>{{ item.device }}</h4>
+                    <div class="card-header">
+                        <b>{{ material.subject }}</b>
                     </div>
-
-                    <a href="#" class="btn btn-primary">Ausleihen</a>
-                    <a href="#" class="btn btn-info">Weitere Infos</a>
+                    <img class="card-img-top" src="#" alt="Bild von {{ material.category }}">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <h4>{{ material.name }}</h4>
+                        </div>
+                        <p class="card-text"></p>
+                        <a href="#" class="btn btn-primary">Ausleihen</a>
+                        <a href="#" class="btn btn-info">Weitere Infos</a>
+                    </div>
                 </div>
-            </div>
-            {% endif %}
-        {% endfor %}
+            {% endfor %}
+        {% endif %}
+
+    {% if devices.count != 0 %}
+            {% for device in devices %}
+                <div class="card col-md-4">
+                    <div class="card-header">
+                        <b>{{ device.subject }}</b>
+                    </div>
+                    <img class="card-img-top" src="#" alt="Bild von {{ device.category }}">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <h4>{{ device.name }}</h4>
+                        </div>
+                        <p class="card-text"></p>
+                        <a href="#" class="btn btn-primary">Ausleihen</a>
+                        <a href="#" class="btn btn-info">Weitere Infos</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+    {% if containers.count != 0 %}
+            {% for container in containers %}
+                <div class="card col-md-4">
+                    <div class="card-header">
+                        <b>{{ container.subject }}</b>
+                    </div>
+                    <img class="card-img-top" src="#" alt="Bild von {{ container.category }}">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <h4>{{ container.name }}</h4>
+                        </div>
+                        <p class="card-text"></p>
+                        <a href="#" class="btn btn-primary">Ausleihen</a>
+                        <a href="#" class="btn btn-info">Weitere Infos</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+
     </div>
 {% endblock %}

@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from LibraryManagement.models import Book, Material, Device, Container
 
 
 def login(request):
@@ -6,134 +7,16 @@ def login(request):
 
 
 def overview(request):
+    books = Book.objects.all()
+    materials = Material.objects.all()
+    devices = Device.objects.all()
+    containers = Container.objects.all()
+
     return render(request, 'overview.html', {
-        "objects": [
-            {
-                "name": "Buch 1",
-                "category": "Buch",
-                "subject": "Mathe",
-                "author": "Hans Peter Wurst",
-                "description": "ich bin ein olles test buch"
-            },
-            {
-                "name": "Buch 2",
-                "category": "Buch",
-                "subject": "Deutsch",
-                "author": "jösfnjköhsf",
-                "description": "kann nix will nix tut nix"
-            },
-            {
-                "name": "Buch 2",
-                "category": "Buch",
-                "subject": "Deutsch",
-                "author": "jösfnjköhsf",
-                "description": "kann nix will nix tut nix"
-            },
-            {
-                "name": "Buch 2",
-                "category": "Buch",
-                "subject": "Deutsch",
-                "author": "jösfnjköhsf",
-                "description": "kann nix will nix tut nix"
-            },
-            {
-                "name": "Buch 2",
-                "category": "Buch",
-                "subject": "Deutsch",
-                "author": "jösfnjköhsf",
-                "description": "kann nix will nix tut nix"
-            },
-            {
-                "name": "Buch 2",
-                "category": "Buch",
-                "subject": "Deutsch",
-                "author": "jösfnjköhsf",
-                "description": "kann nix will nix tut nix"
-            },
-            {
-                "name": "Buch 2",
-                "category": "Buch",
-                "subject": "Deutsch",
-                "author": "jösfnjköhsf",
-                "description": "kann nix will nix tut nix"
-            },
-            {
-                "name": "Buch 2",
-                "category": "Buch",
-                "subject": "Deutsch",
-                "author": "jösfnjköhsf",
-                "description": "kann nix will nix tut nix"
-            },
-            {
-                "name": "Buch 2",
-                "category": "Buch",
-                "subject": "Deutsch",
-                "author": "jösfnjköhsf",
-                "description": "kann nix will nix tut nix"
-            },
-            {
-                "name": "Buch 2",
-                "category": "Buch",
-                "subject": "Deutsch",
-                "author": "jösfnjköhsf",
-                "description": "kann nix will nix tut nix"
-            },
-            {
-                "name": "Buch 2",
-                "category": "Buch",
-                "subject": "Deutsch",
-                "author": "jösfnjköhsf",
-                "description": "kann nix will nix tut nix"
-            },
-            {
-                "name": "Buch 2",
-                "category": "Buch",
-                "subject": "Deutsch",
-                "author": "jösfnjköhsf",
-                "description": "kann nix will nix tut nix"
-            },
-            {
-                "name": "Buch 2",
-                "category": "Buch",
-                "subject": "Deutsch",
-                "author": "jösfnjköhsf",
-                "description": "kann nix will nix tut nix"
-            },
-            {
-                "name": "Buch 2",
-                "category": "Buch",
-                "subject": "Deutsch",
-                "author": "jösfnjköhsf",
-                "description": "kann nix will nix tut nix"
-            },
-            {
-                "name": "Buch 2",
-                "category": "Buch",
-                "subject": "Deutsch",
-                "author": "jösfnjköhsf",
-                "description": "kann nix will nix tut nix"
-            },
-            {
-                "name": "Buch 2",
-                "category": "Buch",
-                "subject": "Deutsch",
-                "author": "jösfnjköhsf",
-                "description": "kann nix will nix tut nix"
-            },
-            {
-                "name": "Buch 2",
-                "category": "Buch",
-                "subject": "Deutsch",
-                "author": "jösfnjköhsf",
-                "description": "kann nix will nix tut nix"
-            },
-            {
-                "name": "Laptopwagen",
-                "device": "Laptops",
-                "category": "Container",
-                "description": "Wagen mit Laptops"
-            }
-        ]
+        "books": books,
+        "materials": materials,
+        "devices": devices,
+        "containers": containers
     })
 
 
