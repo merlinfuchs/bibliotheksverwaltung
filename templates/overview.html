@@ -1,7 +1,17 @@
 {% extends "base.html" %}
 
 {% block main %}
-    <div class="row">
+    <form action="" method="get">
+        <input id="name" class="form-control" type="text" name="name_field" placeholder="Search by Name">
+
+        <input id="subject" class="form-control" type="text" name="book_subject" placeholder="Search by Subject">
+
+        <input id="device_type" class="form-control" type="text" name="type_of_device"
+               placeholder="Search by type of Device">
+        <input class="btn btn-outline-secondary" type="submit" value="OK">
+    </form>
+
+    <div class="card-group">
         {% if books.count != 0 %}
             {% for book in books %}
                 <div class="card col-md-4">
@@ -13,7 +23,7 @@
                         <div class="card-title">
                             <h4>{{ book.name }}</h4>
                         </div>
-                        <p class="card-text">Autor: {{ book.author }}</p>
+                        <p class="card-text">Autor: {{ book.author.first_name }} {{ book.author.last_name }}</p>
                         <a href="#" class="btn btn-primary">Ausleihen</a>
                         <a href="#" class="btn btn-info">Weitere Infos</a>
                     </div>
@@ -21,7 +31,7 @@
             {% endfor %}
         {% endif %}
 
-    {% if materials.count != 0 %}
+        {% if materials.count != 0 %}
             {% for material in materials %}
                 <div class="card col-md-4">
                     <div class="card-header">
@@ -40,7 +50,7 @@
             {% endfor %}
         {% endif %}
 
-    {% if devices.count != 0 %}
+        {% if devices.count != 0 %}
             {% for device in devices %}
                 <div class="card col-md-4">
                     <div class="card-header">
@@ -59,7 +69,7 @@
             {% endfor %}
         {% endif %}
 
-    {% if containers.count != 0 %}
+        {% if containers.count != 0 %}
             {% for container in containers %}
                 <div class="card col-md-4">
                     <div class="card-header">
