@@ -46,13 +46,13 @@ border schatten (karte soll leichten schatten werfen)
 
         {% if materials.count != 0 %}
             {% for material in materials %}
-                <div class="card col-md-4">
+                <div class="card col-md-4 bg-white text-dark border-primary rounded-lg">
                     <div class="card-header">
                         <b>{{ material.subject }}</b>
                     </div>
                     <img class="card-img-top" src="#" alt="Bild von {{ material.category }}">
                     <div class="card-body">
-                        <div class="card-title">
+                        <div class="card-title text-body">
                             <h4>{{ material.name }}</h4>
                         </div>
                         <p class="card-text"></p>
@@ -65,13 +65,13 @@ border schatten (karte soll leichten schatten werfen)
 
         {% if devices.count != 0 %}
             {% for device in devices %}
-                <div class="card col-md-4">
+                <div class="card col-md-4 bg-white text-dark border-primary rounded-lg">
                     <div class="card-header">
                         <b>{{ device.subject }}</b>
                     </div>
                     <img class="card-img-top" src="#" alt="Bild von {{ device.category }}">
                     <div class="card-body">
-                        <div class="card-title">
+                        <div class="card-title text-body">
                             <h4>{{ device.name }}</h4>
                         </div>
                         <p class="card-text"></p>
@@ -84,13 +84,13 @@ border schatten (karte soll leichten schatten werfen)
 
         {% if containers.count != 0 %}
             {% for container in containers %}
-                <div class="card col-md-4">
+                <div class="card col-md-4 bg-white text-dark border-primary rounded-lg">
                     <div class="card-header">
                         <b>{{ container.subject }}</b>
                     </div>
                     <img class="card-img-top" src="#" alt="Bild von {{ container.category }}">
                     <div class="card-body">
-                        <div class="card-title">
+                        <div class="card-title text-body">
                             <h4>{{ container.name }}</h4>
                         </div>
                         <p class="card-text"></p>
