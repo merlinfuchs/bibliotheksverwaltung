@@ -24,6 +24,6 @@ def overview(request):
 def profile(request):
     return render(request, 'profile.html', {})
 
-def detail(request, conten_type, loansubject_ptr_id):
-
+def detail(request, content_type, loansubject_ptr_id):
+    conte
     return render(request, 'detail.html', {})
