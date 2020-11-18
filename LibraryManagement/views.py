@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate
+from LibraryManagement.models import Loan, LoanSubject
+
 
 
 def login(request):
@@ -22,5 +24,6 @@ def overview(request):
 def profile(request):
     return render(request, 'profile.html', {})
 
-def detail(request):
+def detail(request, loansubject_id):
+
     return render(request, 'detail.html', {})
