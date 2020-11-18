@@ -32,13 +32,24 @@ def detail(request, content_type, loansubject_ptr_id):
     #TODO Cant find a better solution at the moment
     if content_type in content_type_checkup:
         if content_type == 'device':
-            content = Device.objects.get(id=loansubject_ptr_id)
+            device = Device.objects.get(id=loansubject_ptr_id)
+            content = {'device_type':device.device_type, 'name':device.name, 'description':device.description}
+            return render(request, 'detail/detail_device.html', content)
         elif content_type == 'container':
-            content = Container.objects.get(id=loansubject_ptr_id)
+            container = Container.objects.get(id=loansubject_ptr_id)
+            content = {'name':container.name, 'description':container.description}
+            return render(request, 'detail/detail_container.html', content)
         elif content_type == 'book':
-            content = Book.objects.get(id=loansubject_ptr_id)
+            book = Book.objects.get(id=loansubject_ptr_id)
+            content = {'name':book.name, 'isbn':book.isbn, 'subject':book.subject, 'description':book.description}
+            return render(request, 'detail/detail_book.html', content)
         elif content_type == 'author':
-            content = Author.objects.get(id=loansubject_ptr_id)
+            author = Author.objects.get(id=loansubject_ptr_id)
+            content = {'first_name':author.first_name, 'last_name':author.last_name}
+            return render(request, 'detail/detail_author.html', content)
         elif content_type == 'material':
-            content = Material.objects.get(id=loansubject_ptr_id)
-    return render(request, 'detail.html', content)
+            material = Material.objects.get(id=loansubject_ptr_id)
+            content = {'name':material.name, 'description':material.description}
+            return render(request, 'detail/detail_material.html', content)
+        #TODO render a 404 not found template
+    return render(request, 'detail/detail_device.html', content)
