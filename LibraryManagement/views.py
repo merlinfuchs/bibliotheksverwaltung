@@ -1,6 +1,8 @@
+import sys
+
 from django.shortcuts import render
 from django.contrib.auth import authenticate
-from LibraryManagement.models import Loan, LoanSubject
+from LibraryManagement.models import Device, Container, Book, Author, Material
 
 
 
@@ -25,5 +27,18 @@ def profile(request):
     return render(request, 'profile.html', {})
 
 def detail(request, content_type, loansubject_ptr_id):
-    conte
-    return render(request, 'detail.html', {})
+    content_type_checkup = ['device', 'container', 'book', 'author', 'material']
+    content = None
+    #TODO Cant find a better solution at the moment
+    if content_type in content_type_checkup:
+        if content_type == 'device':
+            content = Device.objects.get(id=loansubject_ptr_id)
+        elif content_type == 'container':
+            content = Container.objects.get(id=loansubject_ptr_id)
+        elif content_type == 'book':
+            content = Book.objects.get(id=loansubject_ptr_id)
+        elif content_type == 'author':
+            content = Author.objects.get(id=loansubject_ptr_id)
+        elif content_type == 'material':
+            content = Material.objects.get(id=loansubject_ptr_id)
+    return render(request, 'detail.html', content)
