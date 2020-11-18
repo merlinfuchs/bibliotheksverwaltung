@@ -20,5 +20,5 @@ urlpatterns = [
     path('login/', views.login),
     path('overview/', views.overview),
     path('profile/', views.profile),
-    path('detail/<int:loansubject_id>', views.detail)
+    path('detail/<str:content_type>/<int:loansubject_ptr_id>', views.detail)
 ]
