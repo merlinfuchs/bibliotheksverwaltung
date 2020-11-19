@@ -1,12 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ first_name }} {{ last_name }}</title>
-</head>
-<body>
-    <h1>{{ first_name }} {{ last_name }}</h1>
-    <button>borrow</button>
-    <button>back</button>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block main %}
+    <!--<h1>{{ first_name }} {{ last_name }}</h1>-->
+    <div class="main">
+        <div class="row">
+            <div class="col-5">
+                <img src="https://www.fahrschuleaichinger-spielmann.de/wp-content/uploads/2019/03/person-icon-6.png"
+                     width="100%">
+            </div>
+            <div class="col-7">
+                <div class="row" style="text-align: center">
+                    <h1>{{ first_name }} {{ last_name }}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

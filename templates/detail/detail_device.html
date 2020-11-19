@@ -1,14 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ name }}</title>
-</head>
-<body>
-    <a>{{ name }}</a>
-    <a>type: {{ device_type }}</a>
-    <a>description: {{ description }}</a>
-    <button>borrow</button>
-    <button>back</button>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block main %}
+<div class="main">
+        <div class="row">
+            <div class="col-5">
+                <img src="https://i.pinimg.com/564x/87/f7/2e/87f72ecc093bb1b3801600a8cd1bf4c2.jpg"
+                     width="100%">
+            </div>
+            <div class="col-7">
+                <div class="row" style="text-align: center">
+                    <h1>{{ name }}</h1>
+                </div>
+                <div class="row" style="padding-top: 5%">
+                    <p>type: {{ device_type }}</p>
+                </div>
+                <div class="row">
+                    <p>description: {{ description }}</p>
+                </div>
+                <div class="row">
+                    <button>borrow</button>
+                    <button>back</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock main %}

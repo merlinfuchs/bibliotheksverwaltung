@@ -1,13 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ name }}</title>
-</head>
-<body>
-    <a>{{ name }}</a>
-    <a>description: {{ description }}</a>
-    <button>borrow</button>
-    <button>back</button>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block main %}
+<div class="main">
+        <div class="row">
+            <div class="col-5">
+                <img src="https://lh3.googleusercontent.com/proxy/vvlb_mW2uOqQmzUdnqukLIBTsqsjMiujVgjWUTQjZ0EszLbQrSPUSfFFQDhSgAud2sHy0MA4Ll-w8jHe0JKT3oV2pXwTTk0e8Rt8bm0FmZGuo14W1vHCqCd1o1gy54G9ETj7r7qhxOvrJBhdDS1eOv5CE8pyXuvKXVwDDjpSDw"
+                     width="100%">
+            </div>
+            <div class="col-7">
+                <div class="row" style="text-align: center">
+                    <h1>{{ name }}</h1>
+                </div>
+                <div class="row" style="padding-top: 5%">
+                    <p>description: {{ description }}</p>
+                </div>
+                <div class="row">
+                    <button>borrow</button>
+                    <button>back</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock main %}

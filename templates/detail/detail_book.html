@@ -1,15 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ name }}</title>
-</head>
-<body>
-    <a>{{ name }}</a>
-    <a>ISBN: {{ isbn }}</a>
-    <a>subject: {{ subject }}</a>
-    <a>description: {{ description }}</a>
-    <button>borrow</button>
-    <button>back</button>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block main %}
+<div class="main">
+        <div class="row">
+            <div class="col-5">
+                <img src="https://www.stempel-malter.de/wp-content/uploads/2018/02/holz_motivstempel_buch.png"
+                     width="100%">
+            </div>
+            <div class="col-7">
+                <div class="row" style="text-align: center">
+                    <h1>{{ name }}</h1>
+                </div>
+                <div class="row">
+                    <h5>subject: {{ subject }}</h5>
+                </div>
+                <div class="row" style="padding-top: 5%">
+                    <p>Autor: joa Funktion hin oder so mit authorid und name dann</p>
+                </div>
+                <div class="row">
+                    <p>ISBN: {{ isbn }}</p>
+                </div>
+                <div class="row">
+                    <p>description: {{ description }}</p>
+                </div>
+                <div class="row">
+                    <button>borrow</button>
+                    <button>back</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
