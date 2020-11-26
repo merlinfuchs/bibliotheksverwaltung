@@ -26,16 +26,22 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Overview</a>
+                    <a class="nav-link" href="/">Übersicht</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/profile">Profile</a>
-                </li>
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile">Profil</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Anmelden</a>
+                    </li>
+                {% endif %}
             </ul>
             <form class="form-inline my-2 my-lg-0" action="/" method="get">
-                <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search"
+                <input class="form-control mr-sm-2" type="search" name="search" placeholder="Schlagwort"
                        aria-label="Search">
-                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Suche</button>
             </form>
         </div>
     </nav>
@@ -55,17 +61,23 @@
                      src="/static/logo.png" alt="logo">
                 <div>
                     <h4>Bibinv</h4>
-                    <h5 class="lead">Copyright © DQI17</h5>
+                    <h5 class="lead text-truncate">Copyright © 2020 DQI17</h5>
                 </div>
             </div>
             <div class="col-6 col-md-3">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a href="/discord" class="nav-link text-dark p-1">Admin</a>
+                        <a href="/admin" class="nav-link text-dark p-1">Admin</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="/discord" class="nav-link text-dark p-1">Login</a>
-                    </li>
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a href="/logout" class="nav-link text-dark p-1">Abmelden</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a href="/login" class="nav-link text-dark p-1">Anmelden</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
             <div class="col-6 col-md-3">

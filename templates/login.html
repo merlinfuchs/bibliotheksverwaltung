@@ -1,35 +1,39 @@
 {% extends "base.html" %}
 {% block main %}
-<div class="row">
-    <div class="col-sm-1 col-lg-4">
-    </div>
-    <div class="col-sm-10 col-lg-4">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title mb-4 mt-1">Sign in</h4>
-                <form action="/login/" method="post">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <input name="username" class="form-control" placeholder="Username" type="username">
-                    </div> <!-- form-group// -->
-                    <div class="form-group">
-                        <a class="float-right" href="#">Forgot?</a>
-                        <label>Your password</label>
-                        <input name="password" class="form-control" placeholder="Password" type="password">
-                    </div> <!-- form-group// -->
-                    <div class="form-group">
-                        <div class="checkbox">
-                            <label> <input type="checkbox"> Save password </label>
-                        </div> <!-- checkbox .// -->
-                    </div> <!-- form-group// -->
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block" style="background-color:#1A4C96;color:white">Login</button>
-                    </div> <!-- form-group// -->
-                </form>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-11 col-md-8 col-xl-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4 mt-1">Anmelden</h4>
+                        <form action="/login/" method="post">
+                            {% csrf_token %}
+                            {% if failed %}
+                                <p class="text-danger">Nutzername und Passwort stimmen nicht überein</p>
+                            {% endif %}
+                            <div class="form-group">
+                                <label for="username">Nutzername</label>
+                                <input id="username" name="username" class="form-control" placeholder="Nutzername" type="username">
+                            </div>
+                            <div class="form-group">
+                                <a class="float-right" href="#">Forgot?</a>
+                                <label for="password">Passwort</label>
+                                <input id="password" name="password" class="form-control" placeholder="Passwort" type="password">
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label> <input type="checkbox" name="save"> Angemeldet bleiben</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block"
+                                        style="background-color:#1A4C96;color:white">Anmelden
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-sm-1 col-lg-4">
-    </div>
-</div>
 {% endblock %}

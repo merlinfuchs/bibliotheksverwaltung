@@ -1,23 +1,32 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from LibraryManagement.models import Book, Material, Device, Container
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q
 
 
-def login(request):
+def login_page(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
         if user is not None:
-            print('User', username, 'Logged in')
-            # TODO Create Session
+            login(request, user)
+            if not request.POST.get("save"):
+                request.session.set_expiry(60 * 60)
+
+            return redirect("/")
         else:
-            print('Authentication failed for User:', username)
+            return render(request, 'login.html', {"failed": True})
+
     return render(request, 'login.html', {})
 
 
-def overview(request):
+def logout_route(request):
+    logout(request)
+    return redirect("/")
+
+
+def overview_page(request):
     search = request.GET.get("search", "")
     base_filter = Q(name__icontains=search) | Q(description__icontains=search)
 
@@ -40,5 +49,5 @@ def overview(request):
     return render(request, 'overview.html', context)
 
 
-def profile(request):
+def profile_page(request):
     return render(request, 'profile.html', {})
