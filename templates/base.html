@@ -10,41 +10,75 @@
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="/static/theme.css">
-    <title>BibInv</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Bibinv</title>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">BibInv</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<div class="main">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Bibinv</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/">Overview</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/profile">Profile</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0" action="/" method="get">
-            <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Overview</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" action="/" method="get">
+                <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search"
+                       aria-label="Search">
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="my-5">
+        {% block main %}
+        {% endblock %}
     </div>
-</nav>
-
-<div class="my-5">
-    {% block main %}
-    {% endblock %}
+    <div class="push-footer"></div>
 </div>
 
-<div class="p-5 bg-primary">
-    <div class="container">
-        <h2>Footer blabla</h2>
+<div class="bg-light footer">
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col-12 col-md-6 text-dark pb-4">
+                <img class="float-left"
+                     src="/static/logo.png" alt="logo">
+                <div>
+                    <h4>Bibinv</h4>
+                    <h5 class="lead">Copyright © DQI17</h5>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a href="/discord" class="nav-link text-dark p-1">Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/discord" class="nav-link text-dark p-1">Login</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-6 col-md-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a href="/privacy" class="nav-link text-dark p-1">Privatsphäre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/imprint" class="nav-link text-dark p-1">Impressum</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
 
