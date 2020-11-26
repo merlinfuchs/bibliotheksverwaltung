@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from LibraryManagement.models import Book, Material, Device, Container
-from itertools import chain
 from django.contrib.auth import authenticate
+from django.db.models import Q
 
 
 def login(request):
@@ -18,25 +18,17 @@ def login(request):
 
 
 def overview(request):
-    name_filter = {}
-    name = request.GET.get('name_field')
-    if name:
-        name_filter['name'] = name
+    search = request.GET.get("search", "")
+    base_filter = Q(name__icontains=search) | Q(description__icontains=search)
 
-    book_filter = {}
-    subject = request.GET.get('book_subject')
-    if subject:
-        book_filter['subject'] = subject
-
-    device_filter = {}
-    device_type = request.GET.get('type_of_device')
-    if device_type:
-        device_filter['device_type'] = device_type
-
-    books = Book.objects.filter(**name_filter, **book_filter)
-    materials = Material.objects.filter(**name_filter)
-    devices = Device.objects.filter(**name_filter, **device_filter)
-    containers = Container.objects.filter(**name_filter)
+    books = Book.objects.filter(
+        base_filter | Q(subject__icontains=search) |
+        Q(author__first_name__icontains=search) |
+        Q(author__last_name__icontains=search)
+    )
+    materials = Material.objects.filter(base_filter)
+    devices = Device.objects.filter(base_filter | Q(device_type__icontains=search))
+    containers = Container.objects.filter(base_filter)
 
     context = {
         "books": books,

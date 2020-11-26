@@ -14,92 +14,98 @@ border schatten (karte soll leichten schatten werfen)
 {% extends "base.html" %}
 
 {% block main %}
-    <form action="" method="get">
-        <input id="name" class="form-control" type="text" name="name_field" placeholder="Search by Name">
-
-        <input id="subject" class="form-control" type="text" name="book_subject" placeholder="Search by Subject">
-
-        <input id="device_type" class="form-control" type="text" name="type_of_device"
-               placeholder="Search by type of Device">
-        <input class="btn btn-outline-secondary" type="submit" value="OK">
-    </form>
-
-    <div class="card-group">
-        {% if books.count != 0 %}
-            {% for book in books %}
-                <div class="card col-md-4 bg-white text-dark border-primary rounded-lg">
-                    <div class="card-header">
-                        <b>{{ book.subject }}</b>
-                    </div>
-                    <img class="card-img-top" src="#" alt="Bild von {{ book.category }}">
-                    <div class="card-body">
-                        <div class="card-title text-body">
-                            <h4>{{ book.name }}</h4>
+    <div class="container">
+        <div class="row">
+            {% if books.count != 0 %}
+                {% for book in books %}
+                    <div class="col col-12 col-sm-6 col-md-4 mb-3">
+                        <div class="card bg-white text-dark">
+                            <div class="card-header">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-title text-body">
+                                    <h4>{{ book.name }}</h4>
+                                </div>
+                                <p class="card-text">Autor: {{ book.author.first_name }} {{ book.author.last_name }}</p>
+                                <a href="#" class="btn btn-primary">Ausleihen</a>
+                                <a href="#" class="btn btn-info">Weitere Infos</a>
+                            </div>
                         </div>
-                        <p class="card-text">Autor: {{ book.author.first_name }} {{ book.author.last_name }}</p>
-                        <a href="#" class="btn btn-primary">Ausleihen</a>
-                        <a href="#" class="btn btn-info">Weitere Infos</a>
                     </div>
-                </div>
-            {% endfor %}
-        {% endif %}
+                {% endfor %}
+            {% endif %}
 
-        {% if materials.count != 0 %}
-            {% for material in materials %}
-                <div class="card col-md-4 bg-white text-dark border-primary rounded-lg">
-                    <div class="card-header">
-                        <b>{{ material.subject }}</b>
-                    </div>
-                    <img class="card-img-top" src="#" alt="Bild von {{ material.category }}">
-                    <div class="card-body">
-                        <div class="card-title text-body">
-                            <h4>{{ material.name }}</h4>
+            {% if materials.count != 0 %}
+                {% for material in materials %}
+                    <div class="col col-12 col-sm-6 col-md-4 mb-3">
+                        <div class="card bg-white text-dark">
+                            <div class="card-header">
+                                <i class="fas fa-pen-alt"></i>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-title text-body">
+                                    <h4>{{ material.name }}</h4>
+                                </div>
+                                <p class="card-text"></p>
+                                <a href="#" class="btn btn-primary">Ausleihen</a>
+                                <a href="#" class="btn btn-info">Weitere Infos</a>
+                            </div>
                         </div>
-                        <p class="card-text"></p>
-                        <a href="#" class="btn btn-primary">Ausleihen</a>
-                        <a href="#" class="btn btn-info">Weitere Infos</a>
                     </div>
-                </div>
-            {% endfor %}
-        {% endif %}
+                {% endfor %}
+            {% endif %}
 
-        {% if devices.count != 0 %}
-            {% for device in devices %}
-                <div class="card col-md-4 bg-white text-dark border-primary rounded-lg">
-                    <div class="card-header">
-                        <b>{{ device.subject }}</b>
-                    </div>
-                    <img class="card-img-top" src="#" alt="Bild von {{ device.category }}">
-                    <div class="card-body">
-                        <div class="card-title text-body">
-                            <h4>{{ device.name }}</h4>
+            {% if devices.count != 0 %}
+                {% for device in devices %}
+                    <div class="col col-12 col-sm-6 col-md-4 mb-3">
+                        <div class="card bg-white text-dark">
+                            <div class="card-header">
+                                <i class="fas fa-laptop"></i>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-title text-body">
+                                    <h4>{{ device.name }}</h4>
+                                </div>
+                                <p class="card-text"></p>
+                                <a href="#" class="btn btn-primary">Ausleihen</a>
+                                <a href="#" class="btn btn-info">Weitere Infos</a>
+                            </div>
                         </div>
-                        <p class="card-text"></p>
-                        <a href="#" class="btn btn-primary">Ausleihen</a>
-                        <a href="#" class="btn btn-info">Weitere Infos</a>
                     </div>
-                </div>
-            {% endfor %}
-        {% endif %}
+                {% endfor %}
+            {% endif %}
 
-        {% if containers.count != 0 %}
-            {% for container in containers %}
-                <div class="card col-md-4 bg-white text-dark border-primary rounded-lg">
-                    <div class="card-header">
-                        <b>{{ container.subject }}</b>
-                    </div>
-                    <img class="card-img-top" src="#" alt="Bild von {{ container.category }}">
-                    <div class="card-body">
-                        <div class="card-title text-body">
-                            <h4>{{ container.name }}</h4>
+            {% if containers.count != 0 %}
+                {% for container in containers %}
+                    <div class="col col-12 col-sm-6 col-md-4 mb-3">
+                        <div class="card bg-white text-dark">
+                            <div class="card-header">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-title text-body">
+                                    <h4>{{ container.name }}</h4>
+                                </div>
+                                <p class="card-text"></p>
+                                <a href="#" class="btn btn-primary">Ausleihen</a>
+                                <a href="#" class="btn btn-info">Weitere Infos</a>
+                            </div>
                         </div>
-                        <p class="card-text"></p>
-                        <a href="#" class="btn btn-primary">Ausleihen</a>
-                        <a href="#" class="btn btn-info">Weitere Infos</a>
                     </div>
-                </div>
-            {% endfor %}
-        {% endif %}
-
+                {% endfor %}
+            {% endif %}
+        </div>
     </div>
+{% endblock %}
+{% block js %}
+    <script>
+        // Recover filters
+        window.addEventListener("load", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            for (let key of urlParams.keys()) {
+                $(`input[name="${key}"]`).val(urlParams.get(key));
+            }
+        });
+    </script>
 {% endblock %}

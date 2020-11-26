@@ -18,6 +18,6 @@ from django.urls import path
 
 urlpatterns = [
     path('login/', views.login),
-    path('overview/', views.overview),
+    path('', views.overview),
     path('profile/', views.profile),
 ]
