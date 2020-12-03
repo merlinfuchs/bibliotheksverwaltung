@@ -5,22 +5,24 @@ from django.contrib.auth.models import User
 class Loan(models.Model):
     date_of_issue = models.DateField()
     actual_return_date = models.DateField(null=True, blank=True)
-    
+
     borrower = models.ForeignKey(User, on_delete=models.CASCADE)
+
 
 # Dauerleihgabe
 class PermLoan(Loan):
     pass
 
+
 # Ausleihe
 class TempLoan(Loan):
     expected_return_date = models.DateField()
+
 
 # Author
 class Author(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-
 
 
 class LoanSubject(models.Model):
@@ -29,26 +31,28 @@ class LoanSubject(models.Model):
 
     loan_object = models.ManyToManyField(Loan)
 
+
 # Bücher
 class Book(LoanSubject):
-    isbn = models.CharField(max_length=13) # an isbn should be 13 chars long
+    isbn = models.CharField(max_length=13)  # an isbn should be 13 chars long
     subject = models.CharField(max_length=50)
 
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
 
+
 # Material
 class Material(LoanSubject):
     pass
-    
+
+
 # Geräte
 class Device(LoanSubject):
     device_type = models.CharField(max_length=50)
 
+
 # Container
 class Container(LoanSubject):
     pass
-
-
 
 
 """
