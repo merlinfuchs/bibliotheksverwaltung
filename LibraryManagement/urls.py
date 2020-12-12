@@ -22,10 +22,7 @@ urlpatterns = [
     path('logout/', views.logout_route),
     path('', views.overview_page),
     path('profile/', views.profile_page),
-    path('login/', views.login),
-    path('overview/', views.overview),
-    path('overview/borrow/', views.borrow),
-    path('profile/', views.profile),
-    path('admin_overview/', views.admin_overview)
-
+    path('borrow/', views.borrow),
+    path('detail/<int:id>/', views.detail_page),
+    path('print/', views.print_codes_page)
 ]

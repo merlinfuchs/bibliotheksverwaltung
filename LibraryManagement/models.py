@@ -4,54 +4,57 @@ from django.contrib.auth.models import User
 
 class Loan(models.Model):
     date_of_issue = models.DateField()
-    actual_return_date = models.DateField(null=True, blank=True)
+    return_date = models.DateField(null=True, blank=True)
 
     borrower = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
-# Dauerleihgabe
 class PermLoan(Loan):
-    pass
+    def __str__(self):
+        return "{0.borrower.first_name} {0.borrower.last_name} - {0.date_of_issue}".format(self)
 
 
-# Ausleihe
 class TempLoan(Loan):
     expected_return_date = models.DateField()
 
+    def __str__(self):
+        return "{0.borrower.first_name} {0.borrower.last_name} - {0.date_of_issue} -> {0.expected_return_date}".format(self)
 
 
-# Author
 class Author(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
 
+    def __str__(self):
+        return "{0.first_name} {0.last_name}".format(self)
+
 
 class LoanSubject(models.Model):
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=300)
+    description = models.CharField(max_length=2000)
 
-    loan_object = models.ManyToManyField(Loan)
+    loans = models.ManyToManyField(Loan, blank=True)
+
+    def __str__(self):
+        return self.name
 
 
-# Bücher
 class Book(LoanSubject):
     isbn = models.CharField(max_length=13)  # an isbn should be 13 chars long
     subject = models.CharField(max_length=50)
+    release_date = models.DateField()
 
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
 
 
-# Material
 class Material(LoanSubject):
     pass
 
 
-# Geräte
 class Device(LoanSubject):
     device_type = models.CharField(max_length=50)
 
 
-# Container
 class Container(LoanSubject):
     pass
 
