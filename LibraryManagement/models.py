@@ -19,6 +19,7 @@ class TempLoan(Loan):
     expected_return_date = models.DateField()
 
 
+
 # Author
 class Author(models.Model):
     first_name = models.CharField(max_length=50)
