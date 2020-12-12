@@ -1,5 +1,7 @@
-from django.shortcuts import render
-from LibraryManagement.models import Book, Material, Device, Container
+import datetime
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from LibraryManagement.models import Book, Material, Device, Container, TempLoan
 from itertools import chain
 from django.contrib.auth import authenticate
 
@@ -15,6 +17,27 @@ def login(request):
         else:
             print('Authentication failed for User:', username)
     return render(request, 'login.html', {})
+
+
+@login_required
+def borrow(request):
+    id = request.GET.get('id')
+    type = request.GET.get('type')  # Types: book, material, device, container
+    loan = TempLoan(date_of_issue=datetime.timezone.now(), borrower=request.user)
+    item = None
+    if type == 'book':
+        item = Book.objects.get(pk=id)
+    elif type == 'material':
+        item = Material.objects.get(pk=id)
+    elif type == 'device':
+        item = Device.objects.get(pk=id)
+    elif type == 'container':
+        item = Container.objects.get(pk=id)
+
+    if item is not None:
+        item.loan_object.add(loan)
+        loan.save()
+    return redirect('/overview/')
 
 
 def overview(request):
