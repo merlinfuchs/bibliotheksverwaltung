@@ -1,0 +1,18 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.main {
+    min-height: 100%;
+    margin-bottom: -175px;
+}
+
+.footer, .push-footer {
+    min-height: 175px;
+}
+
+.footer img {
+    height: 200px;
+    margin: -75px -20px -75px -50px;
+}

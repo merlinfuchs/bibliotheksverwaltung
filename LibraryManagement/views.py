@@ -1,3 +1,7 @@
+from django.shortcuts import render, redirect
+from LibraryManagement.models import Book, Material, Device, Container
+from django.contrib.auth import authenticate, login, logout
+from django.db.models import Q
 import datetime
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
@@ -6,19 +10,29 @@ from itertools import chain
 from django.contrib.auth import authenticate
 
 
-def login(request):
+def login_page(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
         if user is not None:
-            print('User', username, 'Logged in')
-            # TODO Create Session
+            login(request, user)
+            if not request.POST.get("save"):
+                request.session.set_expiry(60 * 60)
+
+            return redirect("/")
         else:
-            print('Authentication failed for User:', username)
+            return render(request, 'login.html', {"failed": True})
+
     return render(request, 'login.html', {})
 
 
+
+def logout_route(request):
+    logout(request)
+    return redirect("/")
+
+  
 @login_required
 def borrow(request):
     id = request.GET.get('id')
@@ -46,20 +60,19 @@ def overview(request):
     if name:
         name_filter['name'] = name
 
-    book_filter = {}
-    subject = request.GET.get('book_subject')
-    if subject:
-        book_filter['subject'] = subject
 
-    device_filter = {}
-    device_type = request.GET.get('type_of_device')
-    if device_type:
-        device_filter['device_type'] = device_type
+def overview_page(request):
+    search = request.GET.get("search", "")
+    base_filter = Q(name__icontains=search) | Q(description__icontains=search)
 
-    books = Book.objects.filter(**name_filter, **book_filter)
-    materials = Material.objects.filter(**name_filter)
-    devices = Device.objects.filter(**name_filter, **device_filter)
-    containers = Container.objects.filter(**name_filter)
+    books = Book.objects.filter(
+        base_filter | Q(subject__icontains=search) |
+        Q(author__first_name__icontains=search) |
+        Q(author__last_name__icontains=search)
+    )
+    materials = Material.objects.filter(base_filter)
+    devices = Device.objects.filter(base_filter | Q(device_type__icontains=search))
+    containers = Container.objects.filter(base_filter)
 
     context = {
         "books": books,
@@ -71,7 +84,7 @@ def overview(request):
     return render(request, 'overview.html', context)
 
 
-def profile(request):
+def profile_page(request):
     return render(request, 'profile.html', {})
 
 
