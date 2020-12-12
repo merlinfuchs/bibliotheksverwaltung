@@ -50,3 +50,39 @@ def overview(request):
 
 def profile(request):
     return render(request, 'profile.html', {})
+
+
+def admin_overview(request):
+    name_filter = {}
+    name = request.GET.get('name_field')
+    if name:
+        name_filter['name'] = name
+
+    book_filter = {}
+    subject = request.GET.get('book_subject')
+    if subject:
+        book_filter['subject'] = subject
+
+    device_filter = {}
+    device_type = request.GET.get('type_of_device')
+    if device_type:
+        device_filter['device_type'] = device_type
+
+    loan_filter = {}
+    subject = request.GET.get('loan_object')
+    if subject:
+        loan_filter['subject'] = subject
+
+    books = Book.objects.filter(**name_filter, **book_filter, **loan_filter)
+    materials = Material.objects.filter(**name_filter, **loan_filter)
+    devices = Device.objects.filter(**name_filter, **device_filter, **loan_filter)
+    containers = Container.objects.filter(**name_filter, **loan_filter)
+
+    context = {
+        "books": books,
+        "materials": materials,
+        "devices": devices,
+        "containers": containers
+    }
+
+    return render(request, 'admin_overview.html', context)
