@@ -104,4 +104,11 @@ def profile_page(request):
 
 @login_required
 def print_codes_page(request):
-    return render(request, 'print_codes.html', {})
+    raw_ids = request.GET.get('ids')
+    if raw_ids is None:
+        return redirect('/')
+
+    ids = raw_ids.split(',')
+    books = [get_object_or_404(Book, pk=id) for id in ids]
+    print(books)
+    return render(request, 'print_codes.html', {"books": books})

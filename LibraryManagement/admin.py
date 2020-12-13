@@ -55,21 +55,18 @@ class DeviceAdmin(admin.ModelAdmin):
     form = LoanSubjectForm
     list_display = ("name", "device_type")
     list_filter = ("device_type",)
-    actions = (print_code,)
 
 
 @admin.register(Material)
 class MaterialAdmin(admin.ModelAdmin):
     form = LoanSubjectForm
     list_display = ("name",)
-    actions = (print_code,)
 
 
 @admin.register(Container)
 class ContainerAdmin(admin.ModelAdmin):
     form = LoanSubjectForm
     list_display = ("name",)
-    actions = (print_code,)
 
 
 class LoanSubjectInline(admin.TabularInline):

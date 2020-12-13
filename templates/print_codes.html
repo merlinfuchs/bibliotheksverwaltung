@@ -1,0 +1,23 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<title>Print Barcodes</title>
+</head>
+<body>
+<div>
+    {% for book in books %}
+        <h2>{{ book.name }}</h2>
+        <svg class="barcode"
+          jsbarcode-format="ean8"
+          jsbarcode-value="{{book.isbn}}"
+          jsbarcode-textmargin="0"
+          jsbarcode-fontoptions="bold">
+        </svg>
+    {% endfor %}
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.3/dist/barcodes/JsBarcode.ean-upc.min.js"></script>
+<script>
+    JsBarcode(".barcode").init();
+</script>
+</body>
+</html>
