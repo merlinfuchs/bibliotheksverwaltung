@@ -112,3 +112,11 @@ def print_codes_page(request):
     books = [get_object_or_404(Book, pk=id) for id in ids]
     print(books)
     return render(request, 'print_codes.html', {"books": books})
+
+
+def imprint(request):
+    return render(request, 'imprint.html', {})
+
+
+def privacy(request):
+    return render(request, 'privacy.html', {})

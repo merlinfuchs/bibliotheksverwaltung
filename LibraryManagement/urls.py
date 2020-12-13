@@ -25,5 +25,8 @@ urlpatterns = [
     path('borrow/', views.borrow_route),
     path('return/', views.return_route),
     path('detail/<int:id>/', views.detail_page),
-    path('print/', views.print_codes_page)
+    path('print/', views.print_codes_page),
+
+    path('imprint/', views.imprint),
+    path('privacy/', views.privacy)
 ]
