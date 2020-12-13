@@ -1,9 +1,10 @@
 from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q
-import datetime
+from datetime import datetime, timedelta, date
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
-from LibraryManagement.models import Book, Material, Device, Container, TempLoan
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponseBadRequest
+from LibraryManagement.models import Book, Material, Device, Container, TempLoan, LoanSubject, Loan
 
 
 def login_page(request):
@@ -23,31 +24,36 @@ def login_page(request):
     return render(request, 'login.html', {})
 
 
-@login_required
+@login_required(login_url="/login")
 def logout_route(request):
     logout(request)
     return redirect("/")
 
   
-@login_required
-def borrow(request):
-    id = request.GET.get('id')
-    type = request.GET.get('type')  # Types: book, material, device, container
-    loan = TempLoan(date_of_issue=datetime.timezone.now(), borrower=request.user)
-    item = None
-    if type == 'book':
-        item = Book.objects.get(pk=id)
-    elif type == 'material':
-        item = Material.objects.get(pk=id)
-    elif type == 'device':
-        item = Device.objects.get(pk=id)
-    elif type == 'container':
-        item = Container.objects.get(pk=id)
+@login_required(login_url="/login")
+def borrow_route(request):
+    subject_id = request.GET.get('id')
+    now = datetime.now()
+    loan = TempLoan(date_of_issue=now, expected_return_date=now + timedelta(days=14), borrower=request.user)
+    loan.save()
+    item = get_object_or_404(LoanSubject, pk=subject_id)
+    if not item.is_available():
+        return HttpResponseBadRequest()
 
     if item is not None:
-        item.loan_object.add(loan)
-        loan.save()
-    return redirect('/overview/')
+        item.loans.add(loan)
+        item.save()
+
+    return redirect('/profile/')
+
+
+@login_required(login_url="/login")
+def return_route(request):
+    loan_id = request.GET.get('id')
+    loan = get_object_or_404(Loan, pk=loan_id)
+    loan.return_date = date.today()
+    loan.save()
+    return redirect("/profile/")
 
 
 def overview(request):
@@ -70,22 +76,30 @@ def overview_page(request):
     devices = Device.objects.filter(base_filter | Q(device_type__icontains=search))
     containers = Container.objects.filter(base_filter)
 
+    def _filter_available(query):
+        for s in query:
+            if s.is_available():
+                yield s
+
     context = {
-        "books": books,
-        "materials": materials,
-        "devices": devices,
-        "containers": containers
+        "books": _filter_available(books),
+        "materials": _filter_available(materials),
+        "devices": _filter_available(devices),
+        "containers": _filter_available(containers)
     }
 
     return render(request, 'overview.html', context)
 
 
 def detail_page(request, id):
-    return render(request, 'detail.html', {})
+    subject = get_object_or_404(LoanSubject, pk=id)
+    return render(request, 'detail.html', {"subject": subject})
 
 
+@login_required(login_url="/login")
 def profile_page(request):
-    return render(request, 'profile.html', {})
+    loans = TempLoan.objects.filter(borrower=request.user, return_date__isnull=True)
+    return render(request, 'profile.html', {"loans": loans})
 
 
 @login_required

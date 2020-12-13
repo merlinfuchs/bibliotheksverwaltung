@@ -8,40 +8,38 @@
                 <h5 class="text-muted text-truncate">{{ request.user.email }}</h5>
             </div>
             <div class="col-12 col-lg-8 pl-lg-5 py-2">
-                <div class="card mb-3">
-                    <div class="card-body py-2">
-                        <div class="row">
-                            <div class="col-5 pt-1">
-                                <h5 class="m-0"><i class="fas fa-laptop"></i> Device ABC</h5>
-                            </div>
-                            <div class="col-5 pt-1">
-                                <h5 class="text-muted m-0">12. September 1999</h5>
-                            </div>
-                            <div class="col-2">
-                                <button class="btn-sm btn-primary">
-                                    Return
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mb-3">
-                    <div class="card-body py-2">
-                        <div class="row">
-                            <div class="col-5 pt-1">
-                                <h5 class="m-0"><i class="fas fa-book"></i> Book ABC</h5>
-                            </div>
-                            <div class="col-5 pt-1">
-                                <h5 class="text-muted m-0">12. September 1999</h5>
-                            </div>
-                            <div class="col-2">
-                                <button class="btn-sm btn-primary">
-                                    Return
-                                </button>
+                {% for loan in loans %}
+                    {% for subject in loan.loansubject_set.all %}
+                        <div class="card mb-3">
+                            <div class="card-body py-2">
+                                <div class="row">
+                                    <div class="col-5 pt-1">
+                                        <h5 class="m-0">
+                                            {% if subject.device %}
+                                                <i class="fas fa-laptop"></i>
+                                            {% elif subject.book %}
+                                                <i class="fas fa-book"></i>
+                                            {% elif subject.material %}
+                                                <i class="fas fa-pen-alt"></i>
+                                            {% elif subject.container %}
+                                                <i class="fas fa-box"></i>
+                                            {% endif %}
+                                             {{ subject.name }}
+                                        </h5>
+                                    </div>
+                                    <div class="col-5 pt-1">
+                                        <h5 class="m-0 {% if loan.is_overdue %}text-danger{% else %}text-muted{% endif %}">{{loan.expected_return_date}}</h5>
+                                    </div>
+                                    <div class="col-2">
+                                        <a class="btn btn-sm btn-primary" href="/return?id={{ loan.id }}">
+                                            Return
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    {% endfor %}
+                {% endfor %}
             </div>
         </div>
     </div>

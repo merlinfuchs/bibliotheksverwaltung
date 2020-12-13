@@ -22,7 +22,8 @@ urlpatterns = [
     path('logout/', views.logout_route),
     path('', views.overview_page),
     path('profile/', views.profile_page),
-    path('borrow/', views.borrow),
+    path('borrow/', views.borrow_route),
+    path('return/', views.return_route),
     path('detail/<int:id>/', views.detail_page),
     path('print/', views.print_codes_page)
 ]

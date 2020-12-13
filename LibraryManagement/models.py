@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import date
 
 
 class Loan(models.Model):
@@ -17,8 +18,11 @@ class PermLoan(Loan):
 class TempLoan(Loan):
     expected_return_date = models.DateField()
 
+    def is_overdue(self):
+        return self.expected_return_date < date.today()
+
     def __str__(self):
-        return "{0.borrower.first_name} {0.borrower.last_name} - {0.date_of_issue} -> {0.expected_return_date}".format(self)
+        return "{0.borrower.first_name} {0.borrower.last_name} - {0.date_of_issue}".format(self)
 
 
 class Author(models.Model):
@@ -32,8 +36,19 @@ class Author(models.Model):
 class LoanSubject(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=2000)
+    image = models.ImageField(upload_to="static/uploads/", default=None, null=True)
 
     loans = models.ManyToManyField(Loan, blank=True)
+
+    def active_loan(self):
+        return self.loans.get(return_date__isnull=True)
+
+    def is_available(self):
+        try:
+            self.active_loan()
+            return False
+        except Loan.DoesNotExist:
+            return True
 
     def __str__(self):
         return self.name

@@ -16,7 +16,7 @@
                                 </div>
                                 <p class="card-text" style="height: 30px">
                                     Autor: {{ book.author.first_name }} {{ book.author.last_name }}</p>
-                                <a href="#" class="btn btn-primary">Ausleihen</a>
+                                <a href="/borrow?id={{ book.id }}" class="btn btn-primary">Ausleihen</a>
                                 <a href="/detail/{{ book.id }}" class="btn btn-info">Weitere Infos</a>
                             </div>
                         </div>
@@ -36,7 +36,7 @@
                                     <h4>{{ material.name }}</h4>
                                 </div>
                                 <p class="card-text" style="height: 30px"></p>
-                                <a href="#" class="btn btn-primary">Ausleihen</a>
+                                <a href="/borrow?id={{ material.id }}" class="btn btn-primary">Ausleihen</a>
                                 <a href="/detail/{{ material.id }}" class="btn btn-info">Weitere Infos</a>
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                                     <h4>{{ device.name }}</h4>
                                 </div>
                                 <p class="card-text" style="height: 30px"></p>
-                                <a href="#" class="btn btn-primary">Ausleihen</a>
+                                <a href="/borrow?id={{ device.id }}" class="btn btn-primary">Ausleihen</a>
                                 <a href="/detail/{{ device.id }}" class="btn btn-info">Weitere Infos</a>
                             </div>
                         </div>
@@ -76,7 +76,7 @@
                                     <h4>{{ container.name }}</h4>
                                 </div>
                                 <p class="card-text" style="height: 30px"></p>
-                                <a href="#" class="btn btn-primary">Ausleihen</a>
+                                <a href="/borrow?id={{ container.id }}" class="btn btn-primary">Ausleihen</a>
                                 <a href="/detail/{{ container.id }}" class="btn btn-info">Weitere Infos</a>
                             </div>
                         </div>
